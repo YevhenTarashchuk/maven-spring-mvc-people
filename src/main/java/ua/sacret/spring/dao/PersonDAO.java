@@ -1,6 +1,7 @@
 package ua.sacret.spring.dao;
 
 import org.springframework.stereotype.Component;
+import ua.sacret.spring.database.DatabaseInstance;
 import ua.sacret.spring.entity.Person;
 
 import java.util.ArrayList;
@@ -38,6 +39,9 @@ public class PersonDAO {
         personToBeUpdated.setName(updatePerson.getName());
         personToBeUpdated.setAge(updatePerson.getAge());
         personToBeUpdated.setEmail(updatePerson.getEmail());
+
+        DatabaseInstance db = DatabaseInstance.getDatabase();
+        db.update("REPLACE INTO person (id, name, age, email) VALUES ('" + id + "','" + updatePerson.getName() +"','" + updatePerson.getAge() + "','" + updatePerson.getEmail() + "');");
     }
 
     public void delete(int id) {
